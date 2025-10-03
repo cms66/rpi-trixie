@@ -1,5 +1,6 @@
 # Base setup
-
+# TODO
+# - Disable IPv6 without reboot (will be moved to SDM imaging)
 # Error handling
 set -e
 # Error handler
