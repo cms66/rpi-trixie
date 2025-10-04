@@ -77,6 +77,7 @@ download_latest_os_images()
 	#verlatest=$(curl -s https://downloads.raspberrypi.org/operating-systems-categories.json | grep "releaseDate" | head -n 1 | cut -d '"' -f 4)
 	#url64lite=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2025-10-02/2025-10-01-raspios-trixie-arm64-lite.img.xz
 	url64lite=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-$verlatest/$verdownload-raspios-trixie-arm64-lite.img.xz
+	url64desk=https://downloads.raspberrypi.com/raspios_arm64/images/raspios_arm64-$verlatest/$verdownload-raspios-trixie-arm64.img.xz
 	#url64desk=https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-$verlatest/$verlatest-raspios-trixie-arm64.img.xz
 	#url32lite=https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-$verlatest/$verlatest-raspios-trixie-armhf-lite.img.xz
 	#url32desk=https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-$verlatest/$verlatest-raspios-trixie-armhf.img.xz
@@ -87,8 +88,8 @@ download_latest_os_images()
  	printf "Downloading latest images\n"
 	wget -P $imgdir/latest $url64lite
  	wget -P $imgdir/latest $url64desk
-  	wget -P $imgdir/latest $url32lite
-   	wget -P $imgdir/latest $url32desk
+  	#wget -P $imgdir/latest $url32lite
+   	#wget -P $imgdir/latest $url32desk
     	printf "Downloads done, extracting images\n"
 	unxz $imgdir/latest/*.xz
 	chown $usrname:$usrname $imgdir/latest/*.img
