@@ -71,13 +71,15 @@ edit_sdm_config()
 download_latest_os_images()
 {
 	imgdir=${arrSDMconf[imgdirectory]}
-	# Latest images
-	verlatest=$(curl -s https://downloads.raspberrypi.org/operating-systems-categories.json | grep "releaseDate" | head -n 1 | cut -d '"' -f 4)
-	url64lite=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2025-10-02/2025-10-01-raspios-trixie-arm64-lite.img.xz
-	#url64lite=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-$verlatest/$verlatest-raspios-trixie-arm64-lite.img.xz
-	url64desk=https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-$verlatest/$verlatest-raspios-trixie-arm64.img.xz
-	url32lite=https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-$verlatest/$verlatest-raspios-trixie-armhf-lite.img.xz
-	url32desk=https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-$verlatest/$verlatest-raspios-trixie-armhf.img.xz
+	# Latest images - Latest/download versions not matching - tested 4/10/25
+	verlatest="2025-10-02"
+	verdownload="2025-10-01"
+	#verlatest=$(curl -s https://downloads.raspberrypi.org/operating-systems-categories.json | grep "releaseDate" | head -n 1 | cut -d '"' -f 4)
+	#url64lite=https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2025-10-02/2025-10-01-raspios-trixie-arm64-lite.img.xz
+	url64lite=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-$verlatest/$verdownload-raspios-trixie-arm64-lite.img.xz
+	#url64desk=https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-$verlatest/$verlatest-raspios-trixie-arm64.img.xz
+	#url32lite=https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-$verlatest/$verlatest-raspios-trixie-armhf-lite.img.xz
+	#url32desk=https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-$verlatest/$verlatest-raspios-trixie-armhf.img.xz
 	# Replace uncustomized latest images
  	# TODO - check if new versions available
   	rm -rf $imgdir/latest/*.img
