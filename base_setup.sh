@@ -29,7 +29,7 @@ disable_ipv6()
 	# Disable IPv6 - permanent after reboot
 	echo " ipv6.disable=1" >> /boot/firmware/cmdline.txt
 	# Disable IPv6 - immediate until reboot
-	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf # 
+	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf 
 	sysctl -p
 	printf "%s\n" "IPv6 disabled"
 }
@@ -53,21 +53,21 @@ update_system_base()
 	apt-get -y full-upgrade
 	apt-get -y install python3-dev gcc g++ gfortran libdtovl0 libomp-dev git build-essential cmake pkg-config make screen htop stress-ng zip bzip2 fail2ban ufw ntpsec-ntpdate pkgconf openssl libmunge-dev munge python3-setuptools libgpiod-dev mmc-utils smartmontools
  	# Remove local SDM
-  rm -rf /usr/local/sdm
- 	rm -rf /usr/local/bin/sdm
-  rm -rf /etc/sdm
-  # Create Bash shortcuts
-  echo "alias spo=\"sudo poweroff\"" >> /home/$usrname/.bashrc
+	rm -rf /usr/local/sdm
+	rm -rf /usr/local/bin/sdm
+	rm -rf /etc/sdm
+	# Create Bash shortcuts
+	echo "alias spo=\"sudo poweroff\"" >> /home/$usrname/.bashrc
 	echo "alias spr=\"sudo reboot\"" >> /home/$usrname/.bashrc
- 	echo "alias lsb=\"sudo udevadm trigger; lsblk\"" >> /home/$usrname/.bashrc
-  printf "%s\n" "System update complete"
+	echo "alias lsb=\"sudo udevadm trigger; lsblk\"" >> /home/$usrname/.bashrc
+	printf "%s\n" "System update complete"
 }
 
 setup_ntp()
 {
 	printf "%s\n" "Configuring ntp"
- 	sed -i "s/#FallbackNTP/FallbackNTP/g" /etc/systemd/timesyncd.conf # Setup NTP
-  printf "%s\n" "NTP setup complete"
+	sed -i "s/#FallbackNTP/FallbackNTP/g" /etc/systemd/timesyncd.conf # Setup NTP
+	printf "%s\n" "NTP setup complete"
 }
 
 # Git setup
@@ -94,7 +94,7 @@ create_venv()
 {
 	printf "%s\n" "Creating python Virtual Environment"
 	python -m venv --system-site-packages /home/$usrname/.venv
-  # Create Bash shortcuts to activate/deactivate Virtual Envirnment
+  	# Create Bash shortcuts to activate/deactivate Virtual Envirnment
 	echo "alias mvp=\"source ~/.venv/bin/activate\"" >> /home/$usrname/.bashrc
 	echo "alias dvp=\"deactivate\"" >> /home/$usrname/.bashrc
 	chown -R $usrname:$usrname /home/$usrname/.venv
@@ -107,7 +107,7 @@ setup_fail2ban()
 	printf "%s\n" "Configuring fail2ban"
 	cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
 	cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
- 	# Setup ssh rules
+	# Setup ssh rules
 	strssh="filter	= sshd\n\
 banaction = iptables-multiport\n\
 bantime = -1\n\
@@ -128,7 +128,7 @@ setup_firewall()
 	read -rp "Allow remote ssh acces (y/n): " inp </dev/tty
 	if [ X$inp = X"y" ] # TODO - not case insensitive
 	then # Remote
- 		yes | sudo ufw allow ssh
+		yes | sudo ufw allow ssh
 	else # Local
 		yes | sudo ufw allow from $localnet to any port ssh
 	fi
