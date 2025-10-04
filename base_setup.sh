@@ -23,11 +23,15 @@ pimodelnum=$(cat /sys/firmware/devicetree/base/model | cut -d " " -f 3)
 
 disable_ipv6()
 {
+	# Modify hosts file - remove IPv6
 	echo "127.0.0.1		localhost" > /etc/hosts
 	echo "127.0.1.1		$piname $piname.local" >> /etc/hosts
+	# Disable IPv6 - permanent after reboot
 	echo " ipv6.disable=1" >> /boot/firmware/cmdline.txt
-	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+	# Disable IPv6 - immediate until reboot
+	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf # 
 	sysctl -p
+	printf "%s\n" "IPv6 disabled"
 }
 
 set_default_shell()
@@ -38,6 +42,7 @@ set_default_shell()
 	ln -sf bash /bin/sh
 	dpkg-divert --add --local --no-rename /usr/share/man/man1/sh.1.gz
 	dpkg-divert --add --local --no-rename /bin/sh
+	printf "%s\n" "Default shell set to bash"
 }
 
 # Install/update software
@@ -62,7 +67,7 @@ setup_ntp()
 {
 	printf "%s\n" "Configuring ntp"
  	sed -i "s/#FallbackNTP/FallbackNTP/g" /etc/systemd/timesyncd.conf # Setup NTP
-  printf "%s\n" "ntp setup complete"
+  printf "%s\n" "NTP setup complete"
 }
 
 # Git setup
@@ -81,6 +86,7 @@ setup_git()
 	echo "alias mbt=\"sudo bash ~/.pisetup/$repo/test_main.sh\"" >> /home/$usrname/.bashrc
 	echo "alias mps=\"sudo python ~/.pisetup/$repo/setup_main.py\"" >> /home/$usrname/.bashrc 	
 	echo "alias mpt=\"sudo python ~/.pisetup/$repo/test_main.py\"" >> /home/$usrname/.bashrc
+	printf "%s\n" "Git setup complete"
 }
 
 # - Create python Virtual Environment (with access to system level packages) and bash alias for activation
@@ -92,6 +98,7 @@ create_venv()
 	echo "alias mvp=\"source ~/.venv/bin/activate\"" >> /home/$usrname/.bashrc
 	echo "alias dvp=\"deactivate\"" >> /home/$usrname/.bashrc
 	chown -R $usrname:$usrname /home/$usrname/.venv
+	printf "%s\n" "Python Virtual Environment created"
 }
 
 # Configure fail2ban
@@ -110,6 +117,7 @@ backend = systemd\n\
 journalmatch = _SYSTEMD_UNIT=ssh.service + _COMM=sshd\n\
 enabled = true\n"
 	sed -i "s/backend = %(sshd_backend)s/$strssh/g" /etc/fail2ban/jail.local
+	printf "%s\n" "Fail2ban setup complete"
 }
 
 # Configure firewall (ufw)
@@ -126,6 +134,7 @@ setup_firewall()
 	fi
 	sudo ufw logging on
 	yes | sudo ufw enable
+	printf "%s\n" "Firewall setup complete"
 }
 
 get_subnet_cidr()
