@@ -148,16 +148,7 @@ install_server()
 	read -p "TODO check exports + firewall"
 }
 
-modify_sshd()
-{
-	# Modify SSHD config to use created keys
-	sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/g" /etc/ssh/sshd_config
-	echo "HostKey $usrpath/.ssh/id_ecdsa" >> /etc/ssh/sshd_config
-	service sshd restart # Works
-	systemctl is-active sshd
-	read -p "PubkeyAuthentication enabled, press enter to continue"
-}
-
+# SSH
 create_user_ssh_keys()
 {
 	# Create keys for user
