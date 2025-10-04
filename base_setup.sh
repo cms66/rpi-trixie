@@ -45,6 +45,15 @@ set_default_shell()
 	printf "%s\n" "Default shell set to bash"
 }
 
+# Setup SSH
+setup_ssh()
+{
+	# Disable root login
+	sed -i 's/#PermitRootLogin\ prohibit-password/PermitRootLogin\ no/g' /etc/ssh/sshd_config 
+	# Enable PubkeyAuthentication
+	sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/g" /etc/ssh/sshd_config # 
+}
+
 # Install/update software
 update_system_base()
 {
@@ -162,6 +171,7 @@ get_subnet_cidr()
 
 disable_ipv6
 set_default_shell
+setup_ssh
 update_system_base
 setup_ntp
 setup_git
