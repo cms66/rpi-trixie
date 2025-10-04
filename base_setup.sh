@@ -1,6 +1,7 @@
 # Base setup
 # TODO
 # - Disable IPv6 without reboot (will be moved to SDM imaging)
+# - Move bash setup to SDM imaging
 # Error handling
 set -e
 # Error handler
@@ -17,6 +18,16 @@ piname=$(hostname)
 repo="rpi-trixie"
 repobranch="main"
 pimodelnum=$(cat /sys/firmware/devicetree/base/model | cut -d " " -f 3)
+
+set_default_shell()
+{
+	dpkg-divert --remove --no-rename /usr/share/man/man1/sh.1.gz
+	dpkg-divert --remove --no-rename /bin/sh
+	ln -sf bash.1.gz /usr/share/man/man1/sh.1.gz
+	ln -sf bash /bin/sh
+	dpkg-divert --add --local --no-rename /usr/share/man/man1/sh.1.gz
+	dpkg-divert --add --local --no-rename /bin/sh
+}
 
 # Install/update software
 update_system_base()
@@ -129,6 +140,7 @@ get_subnet_cidr()
 	printf "Device = $dev | localnet = $localnet\n"
 }
 
+set_default_shell
 update_system_base
 setup_ntp
 setup_git
