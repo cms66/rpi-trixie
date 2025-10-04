@@ -3,6 +3,7 @@
 # - Move to SDM imaging
 #	- disable IPv6
 # 	- Bash setup
+#	- SSH setup
 
 # Error handling
 set -e
