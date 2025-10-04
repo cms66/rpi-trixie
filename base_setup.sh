@@ -129,10 +129,10 @@ get_subnet_cidr()
 	printf "Device = $dev | localnet = $localnet\n"
 }
 
-#update_system_base
-#setup_ntp
+update_system_base
+setup_ntp
 setup_git
-#create_venv
-#setup_fail2ban
-#get_subnet_cidr
-#setup_firewall
+create_venv
+setup_fail2ban
+get_subnet_cidr
+setup_firewall
