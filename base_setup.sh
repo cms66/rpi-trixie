@@ -1,7 +1,9 @@
 # Base setup
 # TODO
-# - Disable IPv6 without reboot (will be moved to SDM imaging)
-# - Move bash setup to SDM imaging
+# - Move to SDM imaging
+#	- disable IPv6
+# 	- Bash setup
+
 # Error handling
 set -e
 # Error handler
