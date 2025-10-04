@@ -21,7 +21,8 @@ pimodelnum=$(cat /sys/firmware/devicetree/base/model | cut -d " " -f 3)
 
 disable_ipv6()
 {
-	echo "127.0.0.1       localhost" > /etc/hosts
+	echo "127.0.0.1		localhost" > /etc/hosts
+	echo "127.0.1.1		$piname $piname.local" >> /etc/hosts
 	echo " ipv6.disable=1" >> /boot/firmware/cmdline.txt
 	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
 	sysctl -p
