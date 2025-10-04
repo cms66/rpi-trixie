@@ -1,4 +1,5 @@
 # Base setup
+# Assumes IPv6 is disabled, echo " ipv6.disable=1" >> /boot/firmware/cmdline.txt
 # TODO
 # - Disable IPv6 without reboot (will be moved to SDM imaging)
 # - Move bash setup to SDM imaging
