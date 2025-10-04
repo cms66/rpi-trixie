@@ -23,6 +23,8 @@ disable_ipv6()
 {
 	echo "127.0.0.1       localhost" > /etc/hosts
 	echo " ipv6.disable=1" >> /boot/firmware/cmdline.txt
+	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+	sysctl -p
 }
 
 set_default_shell()
