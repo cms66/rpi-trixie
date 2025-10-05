@@ -142,7 +142,7 @@ modify_sdm_image()
 					sdm --customize --plugin user:"adduser=$usrname|password=$usrpass" --plugin user:"deluser=pi" --plugin L10n:host --plugin disables:piwiz --plugin network:"ifname=wlan0|ctype=wifi|wifi-ssid=${arrSDMconf[wifissid]}|wifi-password=${arrSDMconf[wifipassword]}|wificountry=${arrSDMconf[wificountry]}|noipv6" --extend --expand-root --regen-ssh-host-keys --restart $imgmod
       			elif [[ ${usrcon,} = "e" ]]; then
 	 			read -p "ethernet selected, press enter to continue"
-     				sdm --customize --plugin user:"adduser=$usrname|password=$usrpass" --plugin user:"deluser=pi" --plugin L10n:host --plugin disables:piwiz --extend --expand-root --regen-ssh-host-keys --restart $imgmod
+     				sdm --customize --plugin user:"adduser=$usrname|password=$usrpass" --plugin user:"deluser=pi" --plugin L10n:host --plugin disables:piwiz --plugin network:"noipv6" --extend --expand-root --regen-ssh-host-keys --restart $imgmod
 	 		else
     				read -p "Invalid option, press enter to continue"
 				return
