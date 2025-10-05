@@ -28,7 +28,7 @@ disable_ipv6()
 	echo "127.0.0.1		localhost" > /etc/hosts
 	echo "127.0.1.1		$piname $piname.local" >> /etc/hosts
 	# Disable IPv6 - permanent after reboot
-	echo " ipv6.disable=1" >> /boot/firmware/cmdline.txt
+	sed -i "s/regdom=GB/regdom=GB ipv6.disable=1/g" /boot/firmware/cmdline.txt
 	# Disable IPv6 - immediate until reboot
 	echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf 
 	sysctl -p
