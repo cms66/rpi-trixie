@@ -1,5 +1,6 @@
 # SDM setup functions
 # TODO - Disable SDM install in image modification
+# TODO - Disable IPv6
 
 init_sdm()
 {
