@@ -138,7 +138,7 @@ modify_sdm_image()
 			read -p "Password for $usrname: " usrpass
 			read -p "Use WiFi or Ethernet? (w/e): " usrcon
    			if [[ ${usrcon,} = "w" ]]; then
-      				read -p "Wifi selected, press enter to continue"
+      				read -p "Wifi selected (${arrSDMconf[wifissid]}), press enter to continue"
 					sdm --customize --plugin user:"adduser=$usrname|password=$usrpass" --plugin user:"deluser=pi" --plugin L10n:host --plugin disables:piwiz --plugin network:"ifname=wlan0|ctype=wifi|wifi-ssid=${arrSDMconf[wifissid]}|wifi-password=${arrSDMconf[wifipassword]}|wificountry=${arrSDMconf[wificountry]}|noipv6" --extend --expand-root --regen-ssh-host-keys --restart $imgmod
       			elif [[ ${usrcon,} = "e" ]]; then
 	 			read -p "ethernet selected, press enter to continue"
