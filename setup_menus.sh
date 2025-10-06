@@ -61,7 +61,6 @@ declare -a mnuSDMFull=(
 )
 declare -a mnuSSHFull=(
 "Setup - SSH menu#"
-"Modify SSHD#modify_sshd"
 "Create user keys#create_user_ssh_keys"
 "Copy user key to host#copy_user_ssh_keys"
 "Back#break 2"
