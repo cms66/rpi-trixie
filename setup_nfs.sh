@@ -95,7 +95,7 @@ add_nfs_remote()
 		mkdir $shrdir
 		chown -R $usrname:$usrname $shrdir
 		echo "$remnode:$mntdir $shrdir    nfs4 rw,relatime,rsize=32768,wsize=32768,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,local_lock=none 0 0" >> /etc/fstab
-		mount -a  		
+		systemctl daemon-reload  		
 	fi
 	mount -a
 	read -p "NFS remote mount done, press enter to return to menu"
