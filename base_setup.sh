@@ -52,7 +52,8 @@ setup_ssh()
 	# Disable root login
 	sed -i 's/#PermitRootLogin\ prohibit-password/PermitRootLogin\ no/g' /etc/ssh/sshd_config 
 	# Enable PubkeyAuthentication
-	sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/g" /etc/ssh/sshd_config # 
+	sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/g" /etc/ssh/sshd_config
+	service sshd restart # Works
 }
 
 # Install/update software
