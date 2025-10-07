@@ -56,6 +56,13 @@ setup_ssh()
 	service sshd restart # Works
 }
 
+# Setup NFS
+setup_nfs()
+{
+	sed -i "s/NEED_STATD=/NEED_STATD=\"no\"/g" /etc/default/nfs-common
+	sed -i "s/NEED_IDMAPD=/NEED_IDMAPD=\"yes\"/g" /etc/default/nfs-common
+}
+
 # Install/update software
 update_system_base()
 {
