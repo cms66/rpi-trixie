@@ -3,6 +3,11 @@
 install_nfs_server()
 {
 	# TODO - Firewall rule not added if called from add_nfs_local
+	# Messages from install_nfs_server option are
+	# 	nfs-kernel-server install done, press enter to continue
+	# 	Device = eth0 | localnet = 192.168.0.0/24
+	# 	Rule added
+
  	check_package_status nfs-kernel-server y
   	sed -i "s/RPCMOUNTDOPTS=\"--manage-gids\"/RPCMOUNTDOPTS=\"--manage-gids -N 2 -N 3\"/g" /etc/default/nfs-kernel-server # Enforce NFSv4
 	echo "RPCNFSDOPTS=\"-N 2 -N 3\"" >> /etc/default/nfs-kernel-server
