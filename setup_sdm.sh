@@ -197,10 +197,23 @@ burn_sdm_image()
 
 explore_sdm_image()
 {
-	# TODO - List drives
-	PS3="Select drive: "
-	COLUMNS=1
-	select drv in "${lsblk}" "Quit"
+	# Select drive or image
+	read -p "Explore Drive or Current image? (D/C): " useropt
+	if [[ ${useropt,} = "d" ]]; then
+		PS3="Select drive: "
+		COLUMNS=1
+		select drv in "${lsblk}" "Quit"
 	sdm --explore /dev/$drv
-	read -p "Drive unmounted, press enter to contine"
+	read -p "Drive unmounted, press enter to continue"		
+	elif [[ ${useropt,} = "c" ]]; then
+		PS3="Select image: "
+		COLUMNS=1
+		readarray -t arrImg < <(find $imgdir/$dirlist -type f | awk -F "/" '{print $NF}')
+		printf "Images - "$dirlist"\n--------\n"  		
+	else
+ 		read -p "Invalid option, press any key to continue"
+ 		return
+	fi
+
+	read -p "Drive unmounted, press enter to continue"
 }
