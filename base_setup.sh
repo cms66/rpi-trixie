@@ -57,10 +57,25 @@ setup_ssh()
 }
 
 # Setup NFS
-setup_nfs()
+setup_nfs_client()
 {
 	sed -i "s/NEED_STATD=/NEED_STATD=\"no\"/g" /etc/default/nfs-common
 	sed -i "s/NEED_IDMAPD=/NEED_IDMAPD=\"yes\"/g" /etc/default/nfs-common
+}
+
+# Modify hosts file
+modify_hosts()
+{
+	echo "127.0.0.1	localhost" > /hosts
+	echo "127.0.1.1	$(hostname) $(hostname).local" >> /hosts
+	echo -e "\n# Local nodes" >> /hosts
+	input="/boot/firmware/hosts_user"
+	while IFS= read -r line
+	do
+	  echo "$line" >> /hosts
+	done < "$input"
+	printf "%s\n" "Hosts file updated"
+	cat /hosts
 }
 
 # Install/update software
@@ -178,10 +193,12 @@ get_subnet_cidr()
 	printf "Device = $dev | localnet = $localnet\n"
 }
 
-disable_ipv6
 set_default_shell
-setup_ssh
+disable_ipv6
 update_system_base
+setup_ssh
+setup_nfs_client
+modify_hosts
 setup_ntp
 setup_git
 create_venv
