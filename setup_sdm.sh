@@ -194,3 +194,13 @@ burn_sdm_image()
 	done
  	read -p "Burn finished, press enter to contine"
 }
+
+explore_sdm_image()
+{
+	# TODO - List drives
+	PS3="Select drive: "
+	COLUMNS=1
+	select drv in "${lsblk}" "Quit"
+	sdm --explore /dev/$drv
+	read -p "Drive unmounted, press enter to contine"
+}
