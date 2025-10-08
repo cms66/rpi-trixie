@@ -82,6 +82,8 @@ modify_hosts()
 update_system_base()
 {
 	printf "%s\n" "Updating system"
+	# Change Firmware version from default to latest
+	sed /etc/default/rpi-eeprom-update -i -e "s/^FIRMWARE_RELEASE_STATUS.*/FIRMWARE_RELEASE_STATUS=\"latest\"/"
 	apt-get -y update
 	apt-get -y full-upgrade
 	apt-get -y install python3-dev gcc g++ gfortran libdtovl0 libomp-dev git build-essential cmake pkg-config make nfs-common screen htop stress-ng zip bzip2 fail2ban ufw ntpsec-ntpdate pkgconf openssl libmunge-dev munge python3-setuptools libgpiod-dev mmc-utils smartmontools
