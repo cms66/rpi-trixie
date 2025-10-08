@@ -24,9 +24,6 @@ pimodelnum=$(cat /sys/firmware/devicetree/base/model | cut -d " " -f 3)
 
 disable_ipv6()
 {
-	# Modify hosts file - remove IPv6
-	echo "127.0.0.1		localhost" > /etc/hosts
-	echo "127.0.1.1		$piname $piname.local" >> /etc/hosts
 	# Disable IPv6 - permanent after reboot
 	sed -i "s/rootwait/rootwait ipv6.disable=1/g" /boot/firmware/cmdline.txt
 	# Disable IPv6 - immediate until reboot
@@ -66,16 +63,16 @@ setup_nfs_client()
 # Modify hosts file
 modify_hosts()
 {
-	echo "127.0.0.1	localhost" > /hosts
-	echo "127.0.1.1	$(hostname) $(hostname).local" >> /hosts
-	echo -e "\n# Local nodes" >> /hosts
+	echo "127.0.0.1	localhost" > /etc/hosts
+	echo "127.0.1.1	$(hostname) $(hostname).local" >> /etc/hosts
+	echo -e "\n# Local nodes" >> /etc/hosts
 	input="/boot/firmware/hosts_user"
 	while IFS= read -r line
 	do
-	  echo "$line" >> /hosts
+	  echo "$line" >> /etc/hosts
 	done < "$input"
 	printf "%s\n" "Hosts file updated"
-	cat /hosts
+	cat /etc/hosts
 }
 
 # Install/update software
