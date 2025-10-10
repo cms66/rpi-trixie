@@ -63,10 +63,8 @@ setup_nfs_client()
 # Modify hosts file
 modify_hosts()
 {
-	echo "127.0.0.1	localhost" > /etc/hosts
-	echo "127.0.1.1	$(hostname) $(hostname).local" >> /etc/hosts
-	echo -e "\n# Local nodes" >> /etc/hosts
-	input="/boot/firmware/hosts_user"
+	input="/boot/firmware/hosts_user" # list of static hosts as "x.x.x.x	hostname hostname.local"
+	echo "127.0.0.1	localhost\n127.0.1.1	$(hostname) $(hostname).local\n# Local nodes" > /etc/hosts
 	while IFS= read -r line
 	do
 	  echo "$line" >> /etc/hosts
