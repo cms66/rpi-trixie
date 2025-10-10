@@ -86,6 +86,8 @@ update_system_base()
 	rm -rf /usr/local/sdm
 	rm -rf /usr/local/bin/sdm
 	rm -rf /etc/sdm
+	# Disable cloud-init
+	touch /etc/cloud/cloud-init.disabled
 	# Create Bash shortcuts
 	echo "alias spo=\"sudo poweroff\"" >> /home/$usrname/.bashrc
 	echo "alias spr=\"sudo reboot\"" >> /home/$usrname/.bashrc
