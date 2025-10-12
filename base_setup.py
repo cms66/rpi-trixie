@@ -1,5 +1,5 @@
 # First boot - Base setup
-# wget https://raw.githubusercontent.com/cms66/rpi-trixie/main/base_setup.py; sudo python ./base_setup.py
+# wget https://raw.githubusercontent.com/cms66/rpi-trixie/minimal/base_setup.py; sudo python ./base_setup.py
 
 # Imports
 import  subprocess, sys, os, urllib.request
@@ -7,7 +7,7 @@ import  subprocess, sys, os, urllib.request
 def main():
     print("Python setup")
     bashfile = "base_setup.sh"
-    bashurl = "https://raw.githubusercontent.com/cms66/rpi-trixie/main/" + bashfile
+    bashurl = "https://raw.githubusercontent.com/cms66/rpi-trixie/minimal/" + bashfile
     try:
         urllib.request.urlretrieve(bashurl, bashfile) # Download bash script
         subprocess.run(["sudo", "bash", "./" + bashfile], check=True) # Sudo run bash script
