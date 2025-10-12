@@ -1,5 +1,5 @@
 # rpi-trixie
-Testing for Trixie upgrade
+Testing for Trixie upgrade for RPI Zero 2 W and other older models
 ## First boot
 - Login as created user and run 
 ```
