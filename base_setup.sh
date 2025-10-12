@@ -19,7 +19,7 @@ trap handle_error ERR
 usrname=$(logname) # Script runs as root
 piname=$(hostname)
 repo="rpi-trixie"
-repobranch="main"
+repobranch="minimal"
 pimodelnum=$(cat /sys/firmware/devicetree/base/model | cut -d " " -f 3)
 
 disable_ipv6()
